@@ -29,3 +29,15 @@ export const sendChatRequest = async (message:string) =>{
     const data = await response.data
     return data
 }
+
+export const getUserChats = async() =>{
+    const response = await axios.get("/chat/all-chats");
+    console.log(response);
+    
+    
+    if(response.status!== 200){
+        throw new Error("Unable to send chat");
+    }
+    const data = await response.data
+    return data
+}
