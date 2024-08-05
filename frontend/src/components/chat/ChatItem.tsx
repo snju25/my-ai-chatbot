@@ -14,7 +14,11 @@ function extractCodeFromString(message: string) {
         blocks.push({ language: match[1] || "text", code: match[2] });
     }
 
-    return blocks.length ? blocks : [{ code: message }];
+    if (blocks.length === 0) {
+        blocks.push({ code: message });
+    }
+
+    return blocks;
 }
 
 // Check if a block is code or not
@@ -36,37 +40,38 @@ const ChatItem = ({ content, role }: { content: string, role: "user" | "assistan
     }, [content]);
 
     return (
-        role === "assistant" ? (
-            <Box sx={{ display: "flex", p: 2, bgcolor: "#004d5612", my: 2, gap: 2 }}>
-                <Avatar sx={{ ml: "0" }}>
+        <Box
+            sx={{
+                display: "flex",
+                p: 2,
+                bgcolor: role === "assistant" ? "#004d5612" : "#004d56",
+                my: 2,
+                gap: 2,
+            }}
+        >
+            <Avatar sx={{ ml: "0", bgcolor: role === "assistant" ? "transparent" : "black", color: "white" }}>
+                {role === "assistant" ? (
                     <img src="openai.png" alt="openai" width={"30px"} />
-                </Avatar>
-                <Box>
-                    {messageBlocks.length === 1 && !messageBlocks[0].language && (
-                        <Typography sx={{ fontSize: "20px" }}>{content}</Typography>
-                    )}
-                    {messageBlocks.length && messageBlocks.map((block, index) =>
-                        isCodeBlock(block) ? (
-                            <SyntaxHighlighter key={index} style={coldarkDark} language={block.language}>
-                                {block.code}
-                            </SyntaxHighlighter>
-                        ) : (
-                            <Typography key={index} fontSize={"20px"}>{block.code}</Typography>
-                        )
-                    )}
-                </Box>
+                ) : (
+                    `${auth?.user?.name[0]}${auth?.user?.name.split(" ")[1]?.[0] || ""}`
+                )}
+            </Avatar>
+            <Box sx={{width: {md: "700px", sm:"300px", width: "800px" }}}>
+                {messageBlocks.map((block, index) =>
+                    isCodeBlock(block) ? (
+                        <SyntaxHighlighter key={index} style={coldarkDark} language={block.language}>
+                            {block.code}
+                        </SyntaxHighlighter>
+                    ) : (
+                        <Typography key={index} sx={{ fontSize: "20px", whiteSpace: "pre-wrap", wordBreak: "break-word" }}>
+                        {block.code}
+                    </Typography>
+
+                    )
+                )}
             </Box>
-        ) : (
-            <Box sx={{ display: "flex", p: 2, bgcolor: "#004d56", my: 2, gap: 2 }}>
-                <Avatar sx={{ ml: "0", bgcolor: "black", color: "white" }}>
-                    {auth?.user?.name[0]}{auth?.user?.name.split(" ")[1][0] || ""}
-                </Avatar>
-                <Box>
-                    <Typography fontSize={"20px"}>{content}</Typography>
-                </Box>
-            </Box>
-        )
+        </Box>
     );
-}
+};
 
 export default ChatItem;
