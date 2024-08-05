@@ -1,0 +1,31 @@
+import axios from "axios"
+
+export const loginUser = async (email: string, password: string) => {
+    const response = await axios.post("/user/login", {email,password});
+    try {
+        const data = await response.data
+        return data
+    } catch (error:any) {
+        throw new Error(error)
+    }
+}
+
+export const checkAuthStatus = async () =>{
+    const response = await axios.get("/user/auth-status");
+    
+    if(response.status!== 200){
+        throw new Error("Unable to autheticate");
+    }
+    const data = await response.data
+    return data
+}
+
+export const sendChatRequest = async (message:string) =>{
+    const response = await axios.post("/chat/new", {message});
+    
+    if(response.status!== 200){
+        throw new Error("Unable to send chat");
+    }
+    const data = await response.data
+    return data
+}
