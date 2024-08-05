@@ -4,7 +4,7 @@ import { red } from "@mui/material/colors"
 import ChatItem from "../components/chat/ChatItem";
 import { IoMdSend } from "react-icons/io";
 import { useLayoutEffect, useRef, useState } from "react";
-import { getUserChats, sendChatRequest } from "../helpers/api-communicator";
+import { deleteChats, getUserChats, sendChatRequest } from "../helpers/api-communicator";
 import toast from "react-hot-toast";
 
 type Message = {
@@ -29,6 +29,20 @@ const Chat = () => {
     const chatData = await sendChatRequest(content);
     setChatMessages([...chatData.chats]) 
   }
+  const handleDeleteChats = async () => {
+    try {
+      toast.loading("Deleting Chats", {id: "deleteChats"})
+      await deleteChats()
+      setChatMessages([])
+      toast.success("Successfully deleted", {id: "deleteChats"})
+    } catch (error) {
+      console.log(error);
+      toast.success("Deleting Chats failed", {id: "deleteChats"})
+      
+      
+    }
+
+  }
   useLayoutEffect(()=>{
     if(auth?.isLoggedIn && auth.user){
       toast.loading("Loading chats", {id: "loadChats"})
@@ -50,7 +64,7 @@ const Chat = () => {
           </Avatar>
           <Typography sx={{mx:"auto", fontFamily:"work sans"}}>You are talking to a ChatBot</Typography>
           <Typography sx={{mx:"auto", fontFamily:"work sans",my:4,p:4 }}>You can ask some questions relates to knowledge, Business, Advices, Education, stc. But Avoid sharing personal information</Typography>
-          <Button sx={{width: "200px", my:"auto", color:"white", fontWeight: "700", borderRadius: 3, mx:"auto", bgcolor: red[300], ":hover": {
+          <Button onClick={handleDeleteChats} sx={{width: "200px", my:"auto", color:"white", fontWeight: "700", borderRadius: 3, mx:"auto", bgcolor: red[300], ":hover": {
             bgcolor: red.A400
           }}}>Clear Conversation</Button>
         </Box>
