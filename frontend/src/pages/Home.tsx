@@ -1,5 +1,6 @@
 import { Box } from "@mui/material"
 import TypingAnim from "../typer/TypingAnim"
+import Footer from "../components/footer/Footer"
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
 
        </Box>
       </Box>
+      <Footer/>
     </Box>
   )
 }
