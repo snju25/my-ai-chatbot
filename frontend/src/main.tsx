@@ -7,10 +7,8 @@ import { AuthProvider } from './context/AuthContext.tsx'
 import axios from 'axios'
 import {Toaster} from "react-hot-toast"
 // axios.defaults.baseURL = "http://localhost:8000/api/v1"
-axios.defaults.baseURL = "my-ai-chatbot-production-sanjay.up.railway.app"
+axios.defaults.baseURL = "https://my-ai-chatbot-production-sanjay.up.railway.app/api/v1"
 axios.defaults.withCredentials = true;
-
-
 
 const theme = createTheme({typography: {fontFamily: "Roboto Slab, serif", allVariants: {color: "white"}}})
 ReactDOM.createRoot(document.getElementById('root')!).render(

@@ -19,6 +19,7 @@ const Signup = () => {
       toast.loading("Signing Up", {id: "signup"})
       await auth?.signup(name,email,password)
       toast.success("Signed up Successfully", {id: "signup"})
+      navigate(0)
     } catch (error) {
       console.log(error)
       toast.error("Signing in failed", {id: "signup"})

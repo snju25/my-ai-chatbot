@@ -9,6 +9,8 @@ export const createToken = (id:string,email:string,expiresIn:string) =>{
 
 export const verifyToken = async (req:Request,res:Response, next: NextFunction) =>{
     const token = req.signedCookies[`auth_token`]
+    console.log("token " + token);
+    
     if(!token || token.trim() == ""){
         return res.status(401).json({message: "Token not received"})
     }
