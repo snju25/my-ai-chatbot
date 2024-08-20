@@ -18,6 +18,7 @@ const Login = () => {
       toast.loading("Signing In", {id: "login"})
       await auth?.login(email,password)
       toast.success("Signed In Successfully", {id: "login"})
+      navigate(0)
     } catch (error) {
       console.log(error)
       toast.error("Signing in failed", {id: "login"})
@@ -34,6 +35,11 @@ const Login = () => {
     <Box width={'100%'} height={'100%'} display={"flex"} flex={1}>
       <Box padding={8} mt={8} display={{md: "flex",sm:"none",xs: "none"}}>
         <img src="airbot.png" alt="robot" style={{width: "400px"}} />
+      </Box>
+      <Box sx={{justifySelf:"center", alignSelf:"center"}}>
+        <p>Hey visitor please login with these credentials or register to test other functionality of the website</p>
+        <p>Email: sanjay@gmail.com</p>
+        <p>password: abc123</p>
       </Box>
       <Box display={"flex"} flex={{xs: 1, md: 0.5}} justifyContent={"center"} alignItems={"center"} padding={2} ml={"auto"} mt={16}>
         <form onSubmit={handleSubmit} style={{margin: "auto" , padding: "30px" , boxShadow: "10px 10 px 20px #000", borderRadius: "10px", border: "none"}}>
