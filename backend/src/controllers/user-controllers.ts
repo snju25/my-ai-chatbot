@@ -37,7 +37,7 @@ export const userSignup = async  (req: Request,res:Response,next:NextFunction) =
         })
         await user.save()
          // clear cookies
-         res.clearCookie("auth_token", {httpOnly: true, domain: "localhost", signed: true, path: "/"}); //clear any existing cookies
+         res.clearCookie("auth_token", {httpOnly: true, domain: "https://my-ai-chatbot-production-sanjay.up.railway.app", signed: true, path: "/"}); //clear any existing cookies
 
          const token = createToken(user._id.toString(),user.email, "7d")
          // use token in form of cookies
@@ -45,7 +45,7 @@ export const userSignup = async  (req: Request,res:Response,next:NextFunction) =
  
          const expires = new Date();
          expires.setDate(expires.getDate() + 7 )
-         res.cookie("auth_token", token, {path: "/", domain: "localhost" , expires, httpOnly: true, signed: true});
+         res.cookie("auth_token", token, {path: "/", domain: "https://my-ai-chatbot-production-sanjay.up.railway.app" , expires, httpOnly: true, signed: true});
         return res.status(201).json({
             success: true,
             message: "User created",
@@ -120,7 +120,7 @@ export const userLogin = async (req: Request, res: Response, next: NextFunction)
             });
         }
         // clear cookies
-        res.clearCookie("auth_token", { httpOnly: true, domain: "localhost", signed: true, path: "/" }); // clear any existing cookies
+        res.clearCookie("auth_token", { httpOnly: true, domain: "https://my-ai-chatbot-production-sanjay.up.railway.app", signed: true, path: "/" }); // clear any existing cookies
 
         const token = createToken(user._id.toString(), user.email, "7d");
         // use token in form of cookies
@@ -128,7 +128,7 @@ export const userLogin = async (req: Request, res: Response, next: NextFunction)
 
         const expires = new Date();
         expires.setDate(expires.getDate() + 7);
-        res.cookie("auth_token", token, { path: "/", domain: "localhost", expires, httpOnly: true, signed: true });
+        res.cookie("auth_token", token, { path: "/", domain: "https://my-ai-chatbot-production-sanjay.up.railway.app", expires, httpOnly: true, signed: true });
 
         return res.status(200).json({
             message: "Login successfully",
@@ -180,7 +180,7 @@ export const userLogout = async (req: Request, res: Response, next: NextFunction
             return res.status(401).send("Permission didn't match")
         }
 
-        res.clearCookie("auth_token", { httpOnly: true, domain: "localhost", signed: true, path: "/" }); // clear any existing cookies
+        res.clearCookie("auth_token", { httpOnly: true, domain: "https://my-ai-chatbot-production-sanjay.up.railway.app", signed: true, path: "/" }); // clear any existing cookies
 
 
         return res.status(200).json({
