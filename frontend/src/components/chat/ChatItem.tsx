@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Avatar, Box, Typography } from "@mui/material";
 import { useAuth } from "../../context/AuthContext";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { coldarkCold, coldarkDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { coldarkDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 // Extract code blocks and languages from the message
 function extractCodeFromString(message: string) {
