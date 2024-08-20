@@ -6,7 +6,8 @@ import { ThemeProvider, createTheme } from '@mui/material'
 import { AuthProvider } from './context/AuthContext.tsx'
 import axios from 'axios'
 import {Toaster} from "react-hot-toast"
-axios.defaults.baseURL = "http://localhost:8000/api/v1"
+// axios.defaults.baseURL = "http://localhost:8000/api/v1"
+axios.defaults.baseURL = "my-ai-chatbot-production-sanjay.up.railway.app"
 axios.defaults.withCredentials = true;
 
 
