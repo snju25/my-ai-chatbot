@@ -5,6 +5,8 @@
   force = true
 
 [[headers]]
-  [headers.values]
+for = "/*"
+[headers.values]
     Content-Type = "application/javascript"
     X-Content-Type-Options = "nosniff"
+
